@@ -1,0 +1,150 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <title>Ploidy, recombination | Ideogram</title>
+  <meta charset="utf-8">
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <link type="text/css" rel="stylesheet" href="dist/css/ideogram.css"/>
+  <link type="text/css" rel="stylesheet" href="dist/css/bootstrap-colorpicker.css"/>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.1.1/d3.min.js"></script>
+  <script type="text/javascript" src="dist/js/ideogram.js"></script>
+  <script type="text/javascript" src="dist/js/bootstrap-colorpicker.js"></script>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css" rel="stylesheet" integrity="sha384-G3G7OsJCbOk1USkOY4RfeX1z27YaWrZ1YuaQ5tbuawed9IoreRDpWpTkZLXQfPm3" crossorigin="anonymous">
+</head>
+<body>
+  <style type="text/css">
+    #fileInput {
+      display: none;
+    }
+  </style>
+  <h1>Ploidy, recombination </h1>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="col-lg-7">
+
+        <p class="bs-component">
+          <button class="btn btn-primary" onclick="load_file();" id="load">Load</button>
+          <button class="btn btn-warning" onclick="location.reload();" id="clear">Clear</button>
+          
+          <!--  btn-lg btn-block-->
+          <a id="download" style="display: none;" class="btn btn-warning" onclick="generateSVG()">Download</a>
+          <input class="btn btn-info" type="file" id="fileInput">
+        </p>
+        <p class="bs-component">
+
+        </p>
+        <p class="bs-component" id="targetideo">
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-horizontal">
+        <fieldset>
+          <legend>Legend</legend>
+          <div class="form-group">
+            <label for="selectorpreset" class="col-lg-2 control-label">Color Preset</label>
+            <div class="col-lg-10">
+              <select name="select" id="selectorpreset" onchange="colorchange();" class="form-control">
+                <option value="preset1" selected>Preset 1</option> 
+                <option value="preset2">Preset 2</option>
+                <option value="preset3">Preset 3</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="selectorploidy" class="col-lg-2 control-label">Ploïdie</label>
+            <div class="col-lg-10">
+              <select name="select" id="selectorploidy" onchange="updateploidy(this.value);" class="form-control">
+                <option value="2" selected>2</option> 
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: none;" class="form-group" id="ploidyconfdiv" >
+            <label for="tableploidy" class="col-lg-2 control-label">Ploidy Configuration</label>
+            <div class="col-lg-10">
+              <button style="display: none;" class="btn btn-default btn-lg btn-block" id="buttonploidy" onclick="displayploidy()">Afficher le contenu <span class="caret"></span></button>
+              <br>
+              <table style="display: none;" id="tableploidy" class="table table-striped table-hover ">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Ploidy</th>
+                  </tr>
+                </thead>
+                <tbody id="ploidyconf">
+                  <!-- Here goes Script for ploidy numbersss-->
+                </tbody>
+              </table> 
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="editor" class="col-lg-2 control-label">Data</label>
+            <div class="col-lg-10">
+              <textarea id="editor" rows="5" class="form-control" placeholder="Insert values here"></textarea>
+              <span class="help-block">Les données doivent être au format suivant : "1 p 1 0 647 0 2908818",...</span>
+            </div>
+          </div>
+            <!--
+          <div class="form-group">
+            <label for="chrInput" class="col-lg-2 control-label">Chr Size</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" value="" id="chrInput" placeholder="Chr size">
+            </div>
+          </div>
+        -->
+
+        <div class="form-group" style="display: none;" id="chrcolor">
+          <!-- Here goes code that displays the color selector --> 
+        </div>
+
+        <div style="display: none;" id="annotationdiv" class="form-group">
+          <label for="editor" class="col-lg-2 control-label">Annotations Configuration</label>
+          <div class="col-lg-10">
+            <table class="table table-striped table-hover ">
+              <thead>
+                <tr id="annotationhead">
+                 <!-- Here goes initanotationshead-->
+               </tr>
+             </thead>
+             <tbody id="annotationconf">
+              <!-- Here goes initanotations-->
+            </tbody>
+          </table> 
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Letters</label>
+        <div class="col-lg-10">
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios1" value="inline" onclick="displaytext(this.value)" checked="">
+              Show
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios2" onclick="displaytext(this.value)" value="none">
+              Hide
+            </label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript" src="dist/js/load.js"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
+
