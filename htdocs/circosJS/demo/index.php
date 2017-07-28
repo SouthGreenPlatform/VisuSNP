@@ -127,7 +127,8 @@
           </li>
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tracks <b class="caret"></b></a>
-            <ul class="dropdown-menu multi-level" role="menu" id="tracks_content" aria-labelledby="dropdownMenu">    <!--Here goes data for the tracks -->     
+            <ul class="dropdown-menu multi-level" role="menu" id="tracks_content" aria-labelledby="dropdownMenu"> 
+            <div>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="btn btn-success btn-xs" onclick="addNewTrack()">Add new track</button></div>   <!--Here goes data for the tracks -->     
             </ul>
           </li>
 
@@ -148,8 +149,8 @@
        <div class="navbar-form navbar-left" role="search">
         <button class="btn btn-primary" id="newTrackButton">Add new track</button>
         <button class="btn btn-warning" onclick="load_test()" id="load_test">Test data</button>
-        <button class="btn btn-danger" onclick="load_circos()" style="display:none;" id="loadCircos">Load Circos</button>
-        <a id="download" class="btn btn-warning" onclick="generateSVG()">Download</a>
+        <button class="btn btn-danger" onclick="load_circos()" style="display:none;" id="loadCircos">(Re)Load Circos</button>
+        <a id="download" class="btn btn-warning" onclick="generateSVG()">Download as svg</a>
       </div>
       <ul class="nav navbar-nav navbar-right">
         <li>
