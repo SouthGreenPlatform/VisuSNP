@@ -163,6 +163,10 @@
 </div>
 <!-- END OF NAVBARCONTAINER-->
 
+    <!--Progress bar-->
+<div id="bar" class="progress progress-striped" style="margin-top: 63px;">
+  <div id="progBar" class="progress-bar" style="width: 0%; background-color: #3e3f3a;"></div>
+</div>
 
 <div style="display: none;" id="cat">
   <center><i><h5>Magic is happening</h5></i></center>
@@ -170,9 +174,12 @@
 </div>
 <div class="row">
 
+
+
   <!--Div qui se charge de l'affichage du circos-->
   <div class="circoscontainer col-lg-12" >
     <div id='lineChart'></div>
+
   </div>
   <script src='./holdtheline.js'></script>
   <?php

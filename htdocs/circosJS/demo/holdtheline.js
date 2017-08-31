@@ -933,17 +933,18 @@ function addNewTrack(){
   input.appendChild(document.createTextNode("Load File"));
   divcontent.appendChild(input);
 
-  //Bouton remove track
+  //Bouton load circos
   input = document.createElement("button");
   input.setAttribute("class", "btn btn-info ");
   input.setAttribute("onclick","load_circos()");
   input.appendChild(document.createTextNode("Draw Circos"));
   divcontent.appendChild(input);
 
-  //Bouton load circos
+  //Bouton remove track
   input = document.createElement("button");
   input.setAttribute("class", "remove_field btn btn-danger ");
-  input.setAttribute("onclick",'$("#'+getN()+'").remove(); decreaseN();');
+  input.setAttribute("onclick",'$("#'+getN()+'").remove(); decreaseN();'); 
+//  input.setAttribute("onclick",'$("#'+getN()+'").remove(); decreaseN(); load_circos()');
   input.appendChild(document.createTextNode("Remove Track"));
   divcontent.appendChild(input);
 
@@ -1079,6 +1080,11 @@ function load_circos(){
 
   //La grosse fonction super lourde de la mort qui tue : Boucle qui parcourt toutes les track et qui les ajoute au circos
   for(var i = 0; i < id; i++){
+
+    //progress bar:
+    var progWidth = i/(id-1)*100;
+    document.getElementById("progBar").style.width = progWidth+"%";
+
     var selected = $('#selectType'+i).val();     //récupère la séléction pour chaque track le type de la track
     var content  = $('#dataFieldArea'+i).val();  //récupère les données
     $('#'+i).click(function(event){               // Empeche la fermeture au clic
@@ -1150,6 +1156,8 @@ function load_circos(){
   $("#chrselectli").show();
   if(!$("#resetZoom").is(":visible")){
     $("#resetZoom").fadeIn('slow');
+
+
   }
 
   $(function() {
@@ -1172,6 +1180,7 @@ function load_circos(){
   // zoom out
   panZoomInstance.zoom(1)
 })
+  
 }
 function circos_loading(){
   $( function() {
