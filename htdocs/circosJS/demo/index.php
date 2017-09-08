@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="//code.getmdl.io/1.3.0/material.deep_purple-pink.min.css">
   <script src='../dist/circos.js'></script>
   <script src='../dist/svg-pan-zoom.js'></script>
+  <script src='../dist/spectrum.js'></script>
+  <link rel='stylesheet' href='../dist/spectrum.css' />
   <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.js'></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -149,6 +151,7 @@
        <div class="navbar-form navbar-left" role="search">
         <button class="btn btn-primary" id="newTrackButton">Add new track</button>
         <button class="btn btn-warning" onclick="load_test()" id="load_test">Test data</button>
+        <button class="btn btn-warning" onclick="load_test_stack()" id="load_test_stack">Test stack</button>
         <button class="btn btn-danger" onclick="load_circos()" style="display:none;" id="loadCircos">(Re)Load Circos</button>
         <a id="download" class="btn btn-warning" onclick="generateSVG()">Download as svg</a>
       </div>
@@ -167,6 +170,11 @@
 <div id="bar" class="progress progress-striped" style="margin-top: 63px;">
   <div id="progBar" class="progress-bar" style="width: 0%; background-color: #3e3f3a;"></div>
 </div>
+
+    <!--color picker test-->
+<!-- <div id="colorPicker" style="margin-top: 80px;">
+  <input type='text' id="full"/>
+</div> -->
 
 <div style="display: none;" id="cat">
   <center><i><h5>Magic is happening</h5></i></center>
