@@ -834,7 +834,7 @@ function addNewTrack(){
   //menu track
   /////////////////////////////////////////
 
-  //liste des tracks
+  //////liste des tracks
   var trackdiv = document.getElementById("tracks_content");
 
   var formdiv = document.createElement('div');
@@ -845,17 +845,17 @@ function addNewTrack(){
   legend.setAttribute("id","legend"+getN());
   fieldset.appendChild(legend);
 
+  //////Fenetre track
   var formgroup = document.createElement('div');
   formgroup.setAttribute("class","form-group");
 
+  //////champs NAME
   var label = document.createElement('label');
   label.setAttribute("for","name"+getN())
   label.setAttribute("class","col-lg-4 control-label");
   label.appendChild(document.createTextNode("Name"));
   var divcontent = document.createElement("div");
   divcontent.setAttribute("class","col-lg-7");
-
-
   var input = document.createElement("input");
   input.setAttribute("type","text")
   input.setAttribute("onchange","document.getElementById(\"legend"+getN()+"\").innerHTML = this.value")
@@ -868,7 +868,7 @@ function addNewTrack(){
   formgroup.appendChild(divcontent);
   fieldset.appendChild(formgroup);
 
-  //fenetre track details
+  //champs TYPE
   formgroup = document.createElement('div');
   formgroup.setAttribute("class","form-group");
   label = document.createElement('label');
@@ -885,15 +885,6 @@ function addNewTrack(){
   input.setAttribute("class", "form-control");
   input.setAttribute("onchange","updateFields(this.value,\""+getN()+"\");");
 
-
-  //ouvre fenettre track onclick
-function openTrack(){
-  console.log("here");
-  document.getElementByClassName('dropdown-menu').style.display='block';
-}
-
-
-
   for(var i=0; i<options.length;i++){
     var option = document.createElement('option');
     option.value = options[i];
@@ -909,7 +900,7 @@ function openTrack(){
   formgroup.appendChild(divcontent);
   fieldset.appendChild(formgroup);
 
-  //Data Field 
+  //champs DATA
   formgroup = document.createElement('div');
   formgroup.setAttribute("class","form-group");
   label = document.createElement('label');
@@ -962,8 +953,8 @@ function openTrack(){
   //Bouton remove track
   input = document.createElement("button");
   input.setAttribute("class", "remove_field btn btn-danger ");
-  input.setAttribute("onclick",'$("#'+getN()+'").remove(); decreaseN();'); 
-//  input.setAttribute("onclick",'$("#'+getN()+'").remove(); decreaseN(); load_circos()');
+  //input.setAttribute("onclick",'$("#'+getN()+'").remove(); decreaseN();'); 
+  input.setAttribute("onclick",'$("#'+getN()+'").remove(); decreaseN(); load_circos()');
   input.appendChild(document.createTextNode("Remove Track"));
   divcontent.appendChild(input);
 
@@ -1025,6 +1016,11 @@ function openTrack(){
   $('#ul'+getN()).click(function(event){
    event.stopPropagation();
  });
+}
+
+//fonction qui supprime une track
+function removeTrack(){
+
 }
 
 //Fonction qui permet d'increase le compteur de track lorsque on ajoute des track

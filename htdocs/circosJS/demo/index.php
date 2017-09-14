@@ -130,7 +130,9 @@
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tracks <b class="caret"></b></a>
             <ul class="dropdown-menu multi-level" role="menu" id="tracks_content" aria-labelledby="dropdownMenu"> 
-            <div>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="btn btn-success btn-xs" onclick="addNewTrack()">Add new track</button></div>   <!--Here goes data for the tracks -->     
+            <div>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="btn btn-success btn-xs" onclick="addNewTrack()">Add new track</button>
+            <button class="btn btn-danger btn-xs" onclick="removeAllTracks()">Remove all tracks</button>
+            </div>   <!--Here goes data for the tracks -->     
             </ul>
           </li>
 
@@ -214,7 +216,7 @@
       $i++;
     }
     echo "
-    <script>
+    <script>remove()
       load_circos();
     </script>";
   }
