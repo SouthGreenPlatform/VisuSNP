@@ -954,7 +954,8 @@ function addNewTrack(){
   input = document.createElement("button");
   input.setAttribute("class", "remove_field btn btn-danger ");
   //input.setAttribute("onclick",'$("#'+getN()+'").remove(); decreaseN();'); 
-  input.setAttribute("onclick",'$("#'+getN()+'").remove(); decreaseN(); load_circos()');
+  //input.setAttribute("onclick",'$("#'+getN()+'").remove(); decreaseN(); load_circos()');
+  input.setAttribute("onclick", 'removeTrack(getN())');
   input.appendChild(document.createTextNode("Remove Track"));
   divcontent.appendChild(input);
 
@@ -979,7 +980,7 @@ function addNewTrack(){
   //Création d'une track dans le menu track
   var li = document.createElement('li');
   li.setAttribute("class","dropdown-submenu");
-  li.setAttribute("id",getN());
+  li.setAttribute("id", "track"+getN());
 
   //créé le click qui va ouvrir le formulaire de la track
   var a = document.createElement('a');
@@ -1019,7 +1020,12 @@ function addNewTrack(){
 }
 
 //fonction qui supprime une track
-function removeTrack(){
+function removeTrack(trackId){
+  trackId--;
+  var trackToDelete = document.getElementById("track"+trackId);//.getElementById(trackId);
+  console.log(trackId+"\n");  
+  console.log("track to delete : "+trackToDelete+"\n");  
+  trackToDelete.remove();
 
 }
 
@@ -1096,7 +1102,7 @@ function load_circos(){
     }
   }
 
-  console.log("orientation " + circosOrientation);
+  console.log("orientation : " + circosOrientation);
 
   //La grosse fonction super lourde de la mort qui tue : Boucle qui parcourt toutes les track et qui les ajoute au circos
   for(var i = 0; i < id; i++){
@@ -1165,8 +1171,16 @@ function load_circos(){
       scattercpt++;
       break;
       case "Stack":
-      circos.stack(randomId(), stackVarMapper(stackParser(content)),stackConfig(representationcpt,circosOrientation));
-      representationcpt++;
+      if(circosOrientation == "out"){
+        circosOrientation = "in";
+        //console.log("DEBUG STACK if orientation : " + circosOrientation);
+        circos.stack(randomId(), stackVarMapper(stackParser(content)),stackConfig(representationcpt,circosOrientation));
+        representationcpt++;
+      }else{
+        //console.log("DEBUG STACK else orientation : " + circosOrientation);
+        circos.stack(randomId(), stackVarMapper(stackParser(content)),stackConfig(representationcpt,circosOrientation));
+        representationcpt++;
+      }
       break;
       case "Text":
       break;
