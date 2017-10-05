@@ -152,8 +152,8 @@
        </ul>
        <div class="navbar-form navbar-left" role="search">
         <button class="btn btn-primary" id="newTrackButton">Add new track</button>
-        <button class="btn btn-warning" onclick="load_test()" id="load_test">Test data</button>
-        <button class="btn btn-warning" onclick="load_test_stack()" id="load_test_stack">Test stack</button>
+        <button class="btn btn-warning" onclick="load_test()" id="load_test">Load an example</button>
+        <button class="btn btn-warning" onclick="load_mosaic()" id="load_test_stack">Load mosaic example</button>
         <button class="btn btn-danger" onclick="load_circos()" style="display:none;" id="loadCircos">(Re)Load Circos</button>
         <a id="download" class="btn btn-warning" onclick="generateSVG()">Download as svg</a>
       </div>
