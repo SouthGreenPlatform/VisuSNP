@@ -362,37 +362,67 @@ function stackParser(data){
   var split = data.split("\n");
   var localsplit  = "";
   var localchr="";
+  var array_indiv = [];
   for (var i = 0; i < split.length; i++) {
-    localsplit = split[i].split(" ");
+    localsplit = split[i].split(" ");alert(localsplit[4]);
     localchr = {
       chr : localsplit[0],
       start : parseInt(localsplit[1]),
       end : parseInt(localsplit[2]),
-      color : localsplit[3]
+      color : localsplit[3],
+      indiv : localsplit[4]
     }
+    array_indiv.push(localsplit[4]);
     array.push(localchr);
   }
+  alert(array_indiv.length);
   return array;
 }*/
 
 //Stack Parser
-function stackParser(data){
+function stackParser(data,individu){
   var array = [];
   var split = data.split("\n");
-  var localsplit  = "";
+  var localsplit = "";
   var localchr="";
+  for (var i = 0; i < split.length; i++) {
+    localsplit = split[i].split(" ");
+    if (individu == localsplit[4]){
+	    localchr = {
+	      chr : localsplit[0],
+	      start : parseInt(localsplit[1]),
+	      end : parseInt(localsplit[2]),
+	      color : localsplit[3],
+	      indiv : localsplit[4]
+    		}
+	    array.push(localchr);
+	}
+  }
+  return array;
+}
+
+//Stack Parser
+function stackParser2(data){
+  var array = [];
+  var split = data.split("\n");
+  var localsplit = "";
+  var localchr="";
+  var h = new Object();
   for (var i = 0; i < split.length; i++) {
     localsplit = split[i].split(" ");
     localchr = {
       chr : localsplit[0],
       start : parseInt(localsplit[1]),
       end : parseInt(localsplit[2]),
-      color : localsplit[3]
+      color : localsplit[3],
+      indiv : localsplit[4]
     }
     array.push(localchr);
+    h[localsplit[4]]=array;
   }
-  return array;
+  return h;
 }
+
 
 // ----------------------------- FIN PARTIE PARSEURS ------------------------------ //
 
@@ -723,12 +753,12 @@ function stackConfig(position, orientation,trackname){
     strokeWidth: 0,
     direction: 'out',
     thickness: 3,
-    radialMargin: 0.5,
+    radialMargin: 0.1,
 
     //radialMargin: 2,
     margin: 0.1,
     tooltipContent: function (d) {
-        return trackname
+        return d.indiv
       },
     opacity: 1
   }
@@ -830,6 +860,7 @@ function stackVarMapper(fileName){
     d.block_id = d.chr
     d.start = d.start
     d.end = d.end
+    d.indiv = d.indiv
     return d;
   });
   return mappedVar;
@@ -1241,8 +1272,19 @@ function load_circos(){
         representationcpt++;
       }else{
         //console.log("DEBUG STACK else orientation : " + circosOrientation);
-        circos.stack(randomId(), stackVarMapper(stackParser(content)),stackConfig(representationcpt,circosOrientation,trackname,trackname));
-        representationcpt++;
+        var information = stackParser2(content);
+        var nb_indiv = 0;
+        for (var k in information) {
+             // use hasOwnProperty to filter out keys from the Object.prototype
+             if (information.hasOwnProperty(k)) {
+		circos.stack(randomId(), stackVarMapper(stackParser(content,k)),stackConfig(representationcpt,circosOrientation,trackname,trackname));
+		representationcpt++;
+             	nb_indiv++;
+    		}
+  	}
+	
+        //circos.stack(randomId(), stackVarMapper(stackParser(content)),stackConfig(representationcpt,circosOrientation,trackname,trackname));
+        //representationcpt++;
       }
       break;
       case "Text":
@@ -1371,8 +1413,8 @@ function load_mosaic(){
   $('#name22').val("acc11").change();
   $('#name23').val("acc12").change();
   $("#dataFieldAreaC").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/karyotype_banana.txt");
-  $("#dataFieldArea0").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/Borneo_haplo.tab");
-  $("#dataFieldArea1").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/SF215_haplo.tab");
+  $("#dataFieldArea0").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/Borneo_haplo.tab.test");
+  /*$("#dataFieldArea1").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/SF215_haplo.tab");
   $("#dataFieldArea2").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/Microcarpa_haplo.tab");
   $("#dataFieldArea3").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/Guyod_haplo.tab");
   $("#dataFieldArea4").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/PisangMadu_haplo.tab");
@@ -1395,6 +1437,7 @@ function load_mosaic(){
   $("#dataFieldArea21").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/Galeo_haplo.tab");
   $("#dataFieldArea22").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/PTBA00267_haplo.tab");
   $("#dataFieldArea23").load("http://genomeharvest.southgreen.fr/visu/circosJS/demo/data/Chicame_haplo.tab");
+*/
 }
 
 
@@ -1443,40 +1486,11 @@ function load_test(){
 
 function load_mosaic(){
   $('#newTrackButton').click();
-  $('#newTrackButton').click();
-  $('#newTrackButton').click();
-  $('#newTrackButton').click();
-  $('#newTrackButton').click();
-  $('#newTrackButton').click();
-  $('#newTrackButton').click();
-  $('#newTrackButton').click();
   $('#selectType0').val("Stack").change();
-  $('#selectType1').val("Stack").change();
-  $('#selectType2').val("Stack").change();
-  $('#selectType3').val("Stack").change();
-  $('#selectType4').val("Stack").change();
-  $('#selectType5').val("Stack").change();
-  $('#selectType6').val("Stack").change();
-  $('#selectType7').val("Stack").change();
-  $('#name0').val("Borneo").change();
-  $('#name1').val("SF215").change();
-  $('#name2').val("Microcarpa").change();
-  $('#name3').val("Guyod").change();
-  $('#name4').val("PisangMadu").change();
-  $('#name5').val("PisangKlutukWulung").change();
-  $('#name6').val("GuNinChiao").change();
-  $('#name7').val("Manang").change();
+  $('#name0').val("Stack").change();
   //$("#dataFieldAreaC").text("chr1 38193400\nchr2 54522928\nchr3 32030951\nchr4 28191985\nchr5 29137935\nchr6 37293965\nchr7 29833120\nchr8 31585744\nchr9 22352177\nchr10 27624748\nchr11 33540656");
   $("#dataFieldAreaC").load("http://dev.visusnp.southgreen.fr/circosJS/demo/data/karyotype_banana.txt");
-  $("#dataFieldArea0").load("http://dev.visusnp.southgreen.fr/circosJS/demo/data/Borneo_haplo.tab");
-  $("#dataFieldArea1").load("http://dev.visusnp.southgreen.fr/circosJS/demo/data/SF215_haplo.tab");
-  $("#dataFieldArea2").load("http://dev.visusnp.southgreen.fr/circosJS/demo/data/Microcarpa_haplo.tab");
-  $("#dataFieldArea3").load("http://dev.visusnp.southgreen.fr/circosJS/demo/data/Guyod_haplo.tab");
-  $("#dataFieldArea4").load("http://dev.visusnp.southgreen.fr/circosJS/demo/data/PisangMadu_haplo.tab");
-  $("#dataFieldArea5").load("http://dev.visusnp.southgreen.fr/circosJS/demo/data/PisangKlutukWulung_haplo.tab");
-  $("#dataFieldArea6").load("http://dev.visusnp.southgreen.fr/circosJS/demo/data/GuNinChiao_haplo.tab");
-  $("#dataFieldArea7").load("http://dev.visusnp.southgreen.fr/circosJS/demo/data/Manang_haplo.tab");
-  
+  $("#dataFieldArea0").load("http://dev.visusnp.southgreen.fr/circosJS/demo/data/all.tab2");
 
   //load_circos();
 
