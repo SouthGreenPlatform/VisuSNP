@@ -10,7 +10,8 @@
   <link type="text/css" rel="stylesheet" href="dist/css/ideogram.css"/>
   <link type="text/css" rel="stylesheet" href="dist/css/bootstrap-colorpicker.css"/>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.1.1/d3.min.js"></script>
-  <script type="text/javascript" src="dist/js/ideogram.js"></script>
+  <script type="text/javascript" src="../ideogram2/dist/js/ideogram.min.js"></script>
+ <script type="text/javascript" src="dist/js/ideogram.js"></script>
   <script type="text/javascript" src="dist/js/bootstrap-colorpicker.js"></script>
   <script type="text/javascript" src="dist/js/loadideogram.js"></script>
   
@@ -102,8 +103,22 @@
         <ul class="nav navbar-nav">
         <li id="potatosalad">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chromosomes<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+            <script> 
 
+$('body').on('click', '.dropdown-menu', function (e) { $(this).parent().is('.open') && e.stopPropagation(); });
+$('li.dropdown.mega-dropdown a').on('click', function (event) {
+    $(this).parent().toggleClass('open');
+});
+$('body').on('click', function (e) {
+    if (!$('li.dropdown.mega-dropdown').is(e.target) 
+        && $('li.dropdown.mega-dropdown').has(e.target).length === 0 
+        && $('.open').has(e.target).length === 0
+    ) {
+        $('li.dropdown.mega-dropdown').removeClass('open');
+    }
+});
+</script>
+            <ul class="dropdown-menu">
               <div class="form-group">
                 <label for="selectorpreset" class="col-lg-2 control-label">Color Preset</label>
                 <div class="col-lg-10">
